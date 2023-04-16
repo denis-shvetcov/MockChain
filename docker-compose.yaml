@@ -9,6 +9,10 @@ services:
       port: 8080
       nonce: inc
       nodes: node8081:8081,node8082:8082
+      PYTHONUNBUFFERED: 1
+    depends_on:
+      - node8081
+      - node8082
 
   node8081:
     image: chain
@@ -17,6 +21,7 @@ services:
       port: 8081
       nonce: dec
       nodes: node8080:8080,node8082:8082
+      PYTHONUNBUFFERED: 1
 
   node8082:
     image: chain
@@ -25,6 +30,4 @@ services:
       port: 8082
       nonce: r
       nodes: node8080:8080,node8081:8081
-    depends_on:
-      - node8080
-      - node8081
+      PYTHONUNBUFFERED: 1
