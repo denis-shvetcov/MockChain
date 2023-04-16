@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  node8080:
+    image: chain
+    container_name: node8080
+    environment:
+      genesis: true
+      port: 8080
+      nonce: inc
+      nodes: node8081:8081,node8082:8082
+
+  node8081:
+    image: chain
+    container_name: node8081
+    environment:
+      port: 8081
+      nonce: dec
+      nodes: node8080:8080,node8082:8082
+
+  node8082:
+    image: chain
+    container_name: node8082
+    environment:
+      port: 8082
+      nonce: r
+      nodes: node8080:8080,node8081:8081
+    depends_on:
+      - node8080
+      - node8081
