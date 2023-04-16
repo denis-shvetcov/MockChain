@@ -22,12 +22,12 @@ class Node:
 
     def checkCompatibility(self, block):
         if len(self.chain) > 0:
-            if block.previous_hash != self.chain[-1].hash:
-                raise HashNotMatch
             if block.index <= self.chain[-1].index:
                 raise OldBlock
             if block.index > self.chain[-1].index + 1:
                 raise LongestChain
+            if block.previous_hash != self.chain[-1].hash:
+                raise HashNotMatch
         else:
             if block.index != 1:
                 raise InvalidIndex
