@@ -13,12 +13,14 @@ from exceptions import *
 
 
 class Node:
-    chain = []
-    nonce = 0
-    nonce_mode = os.environ['nonce']
-    running = True
-    nodes = os.environ['nodes'].split(',')
-    port = int(os.environ['port'])
+
+    def __init__(self):
+        self.chain = []
+        self.nonce = 0
+        self.nonce_mode = os.environ['nonce']
+        self.running = True
+        self.nodes = os.environ['nodes'].split(',')
+        self.port = int(os.environ['port'])
 
     def checkCompatibility(self, block):
         if len(self.chain) > 0:
